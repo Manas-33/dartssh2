@@ -178,8 +178,9 @@ class SSHTransport {
 
   final _remotePacketSN = SSHPacketSN.fromZero();
 
-  void sendPacket(Uint8List data) {
+  sendPacket(Uint8List data) {
     if (isClosed) {
+      return;
       throw SSHStateError('Transport is closed');
     }
     final packetAlign = _encryptCipher == null
